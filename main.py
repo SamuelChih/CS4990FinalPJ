@@ -11,9 +11,25 @@ import sys
 def closeness_centrality(graph):
     # Initialize the adjacency matrix
     num_nodes = graph.number_of_nodes()
-    closeness_graph = createAdjMatrix(graph,num_nodes)
-    return closeness_graph
-        
+    adj_matrix = createAdjMatrix(graph,num_nodes)
+    
+    #use the adjency Matrix to calculate the closeness centrality
+    #https://medium.com/@pasdan/closeness-centrality-via-networkx-is-taking-too-long-1a58e648f5ce
+    for i in range(0, num_nodes):
+        closeness_value = 0.0
+        possible_paths = list(enumerate(num_nodes[i, :]))
+        shortest_paths = dict(filter( \
+        lambda x: not x[1] == 999, possible_paths))
+
+
+        for j in range(0, num_nodes):
+            if adj_matrix[i][j] != 0:
+                closeness_value += 1.0
+        adj_matrix[i][i] = closeness_value
+
+
+    return adj_matrix
+
 
 
 
