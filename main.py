@@ -9,25 +9,29 @@ size = comm.Get_size()
 status = MPI.Status()
 
 
-# Calculate closeness centrality using Floyd-Warshall Algorithm (parallel)
-
+# Calculate closeness centrality using Floyd-Warshall Algorithm
 def closeness_centrality(graph):
-
+    
     # Initialize the adjacency matrix
+    
+    num_nodes = graph.number_of_nodes()
     adj_matrix = create_adjacency_matrix_mpi(graph)
+    path_length = nx.single_source_shortest_path_length
+    closeness_centrality = {}
+
+    nodes = graph.nodes
+    closeness_centrality = {}
 
     # Adjacency metrix to closeness centrality
     # Refrence: https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.centrality.closeness_centrality.html
-    path_length = nx.single_source_shortest_path_length
-    closeness_centrality = {}
-    for n in range(graph.number_of_nodes()):
+    for n in range(nodes):
         sp = path_length(graph, n)
         totsp = sum(sp.values())
         len_G = len(adj_matrix)
         _closeness_centrality = 0.0
         if totsp > 0.0 and len_G > 1:
             _closeness_centrality = (len(sp) - 1.0) / totsp
-            # normalize to number of nodes - 1 in connected part
+            # normalize to number of nodes-1 in connected part
             s = (len(sp) - 1.0) / (len_G - 1)
             _closeness_centrality *= s
         closeness_centrality[n] = _closeness_centrality

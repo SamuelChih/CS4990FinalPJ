@@ -11,14 +11,19 @@ import sys
 def closeness_centrality(graph):
     
     # Initialize the adjacency matrix
-    nodes = graph.number_of_nodes()
-    adj_matrix = createAdjMatrix(graph,nodes)
-
-    path_length = nx.single_source_shortest_path_length
     
+    num_nodes = graph.number_of_nodes()
+    adj_matrix = createAdjMatrix(graph,num_nodes)
+    path_length = nx.single_source_shortest_path_length
     closeness_centrality = {}
-    for n in nodes:
-        sp = path_length(G, n)
+
+    nodes = graph.nodes
+    closeness_centrality = {}
+
+    # Adjacency metrix to closeness centrality
+    # Refrence: https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.centrality.closeness_centrality.html
+    for n in range(nodes):
+        sp = path_length(graph, n)
         totsp = sum(sp.values())
         len_G = len(adj_matrix)
         _closeness_centrality = 0.0
@@ -85,8 +90,6 @@ print(len(G.nodes))
 closeness = closeness_centrality(G_und)
 
 # Write closeness centrality into output.txt
-
-
 # with open('output.txt', 'w') as f:
 #     for key in closeness:
 #         f.write(str(key) + ' ' + str(closeness[key]) + '\n')
