@@ -19,7 +19,7 @@ def closeness_centrality(graph):
 # Create an adjacency matrix for the graph
 def createAdjMatrix(graph,num_nodes):
     # A big enough number to represent infinity
-    INF = sys.maxsize
+    INF = 999
     
     # Initialize the adjacency matrix
     G_nodes = list(graph.nodes())
