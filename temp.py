@@ -1,5 +1,5 @@
 import gzip
-from numpy import average
+from numpy import append, average
 import networkx as nx
 import matplotlib.pyplot as plt
 from platform import processor
@@ -19,7 +19,8 @@ def closeness_centrality(graph):
 # Create an adjacency matrix for the graph
 def createAdjMatrix(graph,num_nodes):
     # A big enough number to represent infinity
-    INF = 999
+    INF = sys.maxsize
+    
     # Initialize the adjacency matrix
     G_nodes = list(graph.nodes())
     adj_matrix = [[0 for i in range(num_nodes)] for j in range(num_nodes)]
@@ -37,32 +38,32 @@ def createAdjMatrix(graph,num_nodes):
 
 
 #Calculate Floyd-Warshall Algorithm for the adjacency matrix using MPI parallelization
-def floyd_warshall(adj_matrix,num_nodes):
-    # A big enough number to represent infinity
-    INF = 999
-    # Initialize the adjacency matrix
-    G_nodes = list(graph.nodes())
-    # Initialize the distance matrix
-    dist_matrix = [[0 for i in range(num_nodes)] for j in range(num_nodes)] # Initialize the distance matrix
-    for i in range(num_nodes):
-        for j in range(num_nodes):
-            dist_matrix[i][j] = adj_matrix[i][j]
-    # Initialize the predecessor matrix
-    pred_matrix = [[0 for i in range(num_nodes)] for j in range(num_nodes)] # predecessor matrix
-    for i in range(num_nodes):  # initialize predecessor matrix
-        for j in range(num_nodes):
-            pred_matrix[i][j] = i   # initialize predecessor matrix
-    # Initialize the shortest path matrix
-    path_matrix = [[0 for i in range(num_nodes)] for j in range(num_nodes)] # shortest path matrix
-    for i in range(num_nodes):  # initialize shortest path matrix   # initialize shortest path matrix
-        for j in range(num_nodes):  # initialize shortest path matrix
-            path_matrix[i][j] = []  # initialize shortest path matrix   
-    # Initialize the shortest path matrix
-    path_matrix = [[0 for i in range(num_nodes)] for j in range(num_nodes)] # shortest path matrix  
-    for i in range(num_nodes):  # initialize shortest path matrix
-        for j in range(num_nodes):  # initialize shortest path matrix
-            path_matrix[i][j] = []  # initialize shortest path matrix
-    # Initialize the shortest path matrix 
+# def floyd_warshall(adj_matrix,num_nodes):
+#     # A big enough number to represent infinity
+#     INF = 999
+#     # Initialize the adjacency matrix
+#     G_nodes = list(graph.nodes())
+#     # Initialize the distance matrix
+#     dist_matrix = [[0 for i in range(num_nodes)] for j in range(num_nodes)] # Initialize the distance matrix
+#     for i in range(num_nodes):
+#         for j in range(num_nodes):
+#             dist_matrix[i][j] = adj_matrix[i][j]
+#     # Initialize the predecessor matrix
+#     pred_matrix = [[0 for i in range(num_nodes)] for j in range(num_nodes)] # predecessor matrix
+#     for i in range(num_nodes):  # initialize predecessor matrix
+#         for j in range(num_nodes):
+#             pred_matrix[i][j] = i   # initialize predecessor matrix
+#     # Initialize the shortest path matrix
+#     path_matrix = [[0 for i in range(num_nodes)] for j in range(num_nodes)] # shortest path matrix
+#     for i in range(num_nodes):  # initialize shortest path matrix   # initialize shortest path matrix
+#         for j in range(num_nodes):  # initialize shortest path matrix
+#             path_matrix[i][j] = []  # initialize shortest path matrix   
+#     # Initialize the shortest path matrix
+#     path_matrix = [[0 for i in range(num_nodes)] for j in range(num_nodes)] # shortest path matrix  
+#     for i in range(num_nodes):  # initialize shortest path matrix
+#         for j in range(num_nodes):  # initialize shortest path matrix
+#             path_matrix[i][j] = []  # initialize shortest path matrix
+#     # Initialize the shortest path matrix 
     
 
 # #Calculate Floyd-Warshall Algorithm for the adjacency matrix
